@@ -22,11 +22,34 @@ public class MySet<T> extends MyAbstractSet<T> {
 
     @Override
     public MyAbstractSet<T> remove(T element) {
-        return null;
+//        MyListElement<T> cursor = this.backing.head;
+//        MyList<T> result = new MyList<>();
+//
+//        while (cursor != null){
+//            if (cursor.value != element){
+//                result.append(cursor.value);
+//            }
+//            cursor = cursor.next;
+//        }
+//        this.backing = result;
+
+        this.backing = this.backing.filter(value -> value != element);
+
+        return this;
     }
 
     @Override
     public boolean contains(T element) {
         return this.backing.contains(element);
+    }
+
+    @Override
+    public boolean isEmpty() {
+       return this.backing.isEmpty();
+    }
+
+    @Override
+    public int size() {
+        return this.backing.size();
     }
 }

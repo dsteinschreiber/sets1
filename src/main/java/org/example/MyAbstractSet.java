@@ -4,4 +4,6 @@ public abstract class MyAbstractSet<T> {
     public abstract MyAbstractSet<T> add(T element);
     public abstract MyAbstractSet<T> remove(T element);
     public abstract boolean contains(T element);
+    public abstract boolean isEmpty();
+    public abstract int size();
 }
