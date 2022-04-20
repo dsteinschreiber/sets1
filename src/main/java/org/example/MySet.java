@@ -1,13 +1,15 @@
 package org.example;
 
+import java.lang.management.MemoryType;
+
 public class MySet<T> extends MyAbstractSet<T> {
 
     private MyList<T> backing = new MyList<>();
 
-    public static <T> MySet<T> of(T... elements){
+    public static <T> MySet<T> of(T... elements) {
         MySet<T> result = new MySet<>();
 
-        for (T element: elements) {
+        for (T element : elements) {
             result.add(element);
         }
 
@@ -16,7 +18,9 @@ public class MySet<T> extends MyAbstractSet<T> {
 
     @Override
     public MyAbstractSet<T> add(T element) {
-        this.backing.append(element);
+        if (!this.contains(element)) {
+            this.backing.append(element);
+        }
         return this;
     }
 
@@ -45,11 +49,58 @@ public class MySet<T> extends MyAbstractSet<T> {
 
     @Override
     public boolean isEmpty() {
-       return this.backing.isEmpty();
+        return this.backing.isEmpty();
     }
 
     @Override
     public int size() {
         return this.backing.size();
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null){
+            return false;
+        }
+
+        if (!(object instanceof  MySet)){
+            return false;
+        }
+
+        MySet<T> that = (MySet<T>) object;
+
+        return that.isSubsetOf(this) && this.isSubsetOf(that);
+
+    }
+
+    @Override
+    public String toString() {
+        return this.backing.toString();
+    }
+
+    @Override
+    public boolean isSubsetOf(MyAbstractSet<T> that) {
+        for (T value: this.backing) {
+            if (!(that.contains(value))){
+                return false;
+            }
+        }
+        return true;
+
+
+
+
+//        MyListElement<T> cursor = this.backing.head;
+//
+//        while (cursor != null){
+//            if (!(that.contains(cursor.value))){
+//                return false;
+//            }
+//            cursor = cursor.next;
+//        }
+//
+//        return true;
+    }
+
+
 }
