@@ -26,7 +26,9 @@ public class MySet<T> extends MyAbstractSet<T> implements Iterable<T> {
     @Override
     public MyAbstractSet<T> add(T element) {
         if (!this.contains(element)) {
-            this.backing.append(element);
+//            this.backing.append(element);
+            this.backing.push(element);
+            // same result, much quicker (O(1) instead of O(n))
         }
         return this;
     }
@@ -110,8 +112,13 @@ public class MySet<T> extends MyAbstractSet<T> implements Iterable<T> {
     }
 
 
+//    @Override
+//    public Iterator<T> iterator() {
+//        return new MySetIterator<T>(this);
+//    }
+
     @Override
     public Iterator<T> iterator() {
-        return new MySetIterator<T>(this);
+        return new MyNewSetIterator<T>(this.backing.iterator());
     }
 }
