@@ -2,6 +2,8 @@ package org.example;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Iterator;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MySetTest {
@@ -65,5 +67,17 @@ public class MySetTest {
     public void toStringTest() {
         assertEquals("[ 1  2  3 ]", MySet.of(1, 2, 3).toString());
 
+
+        // Make this happen
+        for (int value : MySet.of(1, 2, 3)) {
+            System.out.println(value);
+        }
+
+        Iterator<Integer> iterator = MySet.of(1, 2, 3).iterator();
+
+        while (iterator.hasNext()){
+            int value = iterator.next();
+            System.out.println(value);
+        }
     }
 }

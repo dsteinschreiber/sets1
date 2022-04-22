@@ -1,10 +1,17 @@
 package org.example;
 
 import java.lang.management.MemoryType;
+import java.util.Iterator;
 
-public class MySet<T> extends MyAbstractSet<T> {
+public class MySet<T> extends MyAbstractSet<T> implements Iterable<T> {
 
     private MyList<T> backing = new MyList<>();
+
+
+    // Example of package private
+    MyList<T> getBacking() {
+        return backing;
+    }
 
     public static <T> MySet<T> of(T... elements) {
         MySet<T> result = new MySet<>();
@@ -103,4 +110,8 @@ public class MySet<T> extends MyAbstractSet<T> {
     }
 
 
+    @Override
+    public Iterator<T> iterator() {
+        return new MySetIterator<T>(this);
+    }
 }
