@@ -4,11 +4,11 @@ import java.util.Iterator;
 
 public class MySetIterator<T> implements Iterator<T> {
 
-    private final MySet<T> setInstance;
+    private final MyListSet<T> setInstance;
 
     private MyListElement<T> cursor;
 
-    public MySetIterator(MySet<T> setInstance){
+    public MySetIterator(MyListSet<T> setInstance){
         this.setInstance = setInstance;
         cursor = setInstance.getBacking().head;
     }

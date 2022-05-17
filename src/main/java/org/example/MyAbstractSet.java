@@ -1,14 +1,23 @@
 package org.example;
 
-public abstract class MyAbstractSet<T> {
-    public abstract MyAbstractSet<T> add(T element);
-    public abstract MyAbstractSet<T> remove(T element);
-    public abstract boolean contains(T element);
-    public abstract boolean isEmpty();
-    public abstract int size();
+public abstract class MyAbstractSet<T> implements MySet<T>{
+
     @Override
-    public abstract boolean equals(Object that);
+    public boolean equals(Object object){
+        if (object == null){
+            return false;
+        }
+
+        if (!(object instanceof  MyAbstractSet)){
+            return false;
+        }
+
+        MyAbstractSet<T> that = (MyAbstractSet<T>) object;
+
+        return that.isSubsetOf(this) && this.isSubsetOf(that);
+    }
+
     @Override
     public abstract String toString();
-    public abstract boolean isSubsetOf(MyAbstractSet<T> that);
+
 }
